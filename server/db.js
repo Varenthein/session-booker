@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const connectToDB = () => {
 
   // connect to DB
-  const uri = process.env.NODE_ENV !== 'production' ? 'mongodb://localhost:27017/photosDB' : process.env.DB_URI
+  const uri = process.env.NODE_ENV === 'dev' ? 'mongodb://localhost:27017/photosDB' : process.env.DB_URI
   mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   const db = mongoose.connection
 
