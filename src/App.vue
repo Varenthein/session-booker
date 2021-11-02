@@ -17,13 +17,3 @@ import PageFooter from './components/layout/PageFooter'
 import Container from './components/layout/Container'
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Calibri, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #fff;
-  margin: 0;
-}
-</style>

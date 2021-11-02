@@ -22,7 +22,7 @@
       <div v-if="countBookingsForDay(day) === slotsPerDay" :class="$style.dayBusy">
         Zajęte
       </div>
-      <div v-else>
+      <div v-else @click="$emit('dayPick', day)">
         {{ day }}
       </div>
     </div>
@@ -38,6 +38,8 @@ const props = defineProps<{
   month: number,
   bookings: Booking[]
 }>()
+
+const emit = defineEmits(['dayPick'])
 
 const disabledDays = computed(() => new Date(2021, props.month, 1).getDay() - 1)
 const daysInMonth = computed(() => new Date(2021, props.month, 0).getDate())
@@ -56,17 +58,22 @@ const countBookingsForDay = (day: number) => {
   flex-wrap: wrap;
 
   > div {
-    flex: 0 0 12%;
+    flex: 0 0 13%;
     border: 1px solid $baseTextColor;
     aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
     margin: 0.5%;
     cursor: pointer;
     transition: $transition;
     opacity: 0.9;
+
+    div {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
 
     &.header {
       font-size: 1.5rem;
@@ -83,13 +90,8 @@ const countBookingsForDay = (day: number) => {
     }
 
     .dayBusy {
-      width: 100%;
-      height: 100%;
       background: $activeColor url('../../assets/images/reindeer.png') no-repeat center center;
       background-size: 90% auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
 
     &:hover:not(.disabled) {
@@ -101,6 +103,22 @@ const countBookingsForDay = (day: number) => {
   &:hover {
     > div:not(:hover):not(.header):not(.disabled) {
       opacity: 0.6;
+    }
+  }
+}
+
+@media (max-width: #{$sm-breakpoint}) {
+  .dayPicker > div {
+    &.header {
+      font-size: 1rem;
+    }
+
+    .dayBusy {
+      font-size: 0.8rem;
+    }
+
+    > div {
+      font-size: 1.4rem;
     }
   }
 }

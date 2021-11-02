@@ -4,6 +4,14 @@
   max-width: 100%;
 }
 
+/* backgrounds */
+
+.back {
+  &--fog {
+    background: rgba(0,0,0,0.5);
+  }
+}
+
 /* width */
 .max-wd {
   @for $i from 0 through 6 {
@@ -11,6 +19,34 @@
       max-width: #{$i*10}rem;
     }
   }
+}
+
+.wd {
+  &--100 {
+    width: 100%;
+  }
+}
+
+/* height */
+.hg {
+  &--100 {
+    height: 100%;
+  }
+}
+
+/* positions */
+.p {
+  &--fixed {
+    position: fixed;
+  }
+}
+
+.top {
+  &--0 { top: 0 };
+}
+
+.left {
+  &--0 { left: 0 };
 }
 
 /* margins */
@@ -35,6 +71,65 @@
     @for $i from 0 through 6 {
       &--#{$i} {
         margin-bottom: #{$i}rem !important;
+      }
+    }
+  }
+
+  &r {
+    @for $i from 0 through 6 {
+      &--#{$i} {
+        margin-right: #{$i}rem !important;
+      }
+    }
+
+    &--05r {
+      margin-right: 0.5rem !important;
+    }
+  }
+
+  &l {
+    @for $i from 0 through 6 {
+      &--#{$i} {
+        margin-left: #{$i}rem !important;
+      }
+    }
+
+    &--05r {
+      margin-left: 0.5rem !important;
+    }
+  }
+}
+
+/* paddings */
+.p {
+
+  &x {
+    &--auto {
+      padding-left: auto !important;
+      padding-right: auto !important;
+    }
+  }
+
+  &t {
+    @for $i from 0 through 6 {
+      &--#{$i} {
+        padding-top: #{$i}rem !important;
+      }
+    }
+  }
+
+  &b {
+    @for $i from 0 through 6 {
+      &--#{$i} {
+        padding-bottom: #{$i}rem !important;
+      }
+    }
+  }
+
+  &xy {
+    @for $i from 0 through 6 {
+      &--#{$i} {
+        padding: #{$i}rem !important;
       }
     }
   }
@@ -112,10 +207,28 @@
 
 }
 
+/* lists */
+
+.list {
+  &-t {
+    &--none {
+      list-style-type: none;
+    }
+  }
+}
+
 @media (max-width: #{$md-breakpoint}) {
   .d-md {
     &--none {
       display: none;
+    }
+  }
+    /* width */
+  .max-md-wd {
+    @for $i from 0 through 6 {
+      &--#{$i*10}r {
+        max-width: #{$i*10}rem;
+      }
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <header class="flex flex-jus--sb">
     <div class="flex-shrink--1">
-      <img class="img-responsive" src="../../assets/images/frameAngle.png">
+      <img class="img-responsive d-sm--none" src="../../assets/images/frameAngle.png">
     </div>
 
     <!-- main content -->
@@ -10,7 +10,7 @@
         <Reindeer class="img-responsive d-md--none" direction="right" />
       </div>
       <div class="flex flex-jus--center flex-al--center flex-dir--col flex-shrink--1">
-        <img class="flex-shrink--1" src="../../assets/images/headerFrame--top.png">
+        <img class="flex-shrink--1 max-md-wd--20r" src="../../assets/images/headerFrame--top.png">
         <h1 :class="$style.heading">
           Zarezerwuj termin
         </h1>
@@ -25,7 +25,7 @@
 
     <div class="flex-shrink--1">
       <img
-        class="img-responsive tf-flipX" src="../../assets/images/frameAngle.png">
+        class="img-responsive tf-flipX d-sm--none" src="../../assets/images/frameAngle.png">
     </div>
   </header>
 </template>
@@ -42,6 +42,16 @@ import Reindeer from '../layout/Reindeer'
 
   &::first-letter {
     font-size: 5rem;
+  }
+}
+
+@media (max-width: #{$sm-breakpoint}) {
+  .heading {
+    font-size: 3rem;
+
+    &::first-letter {
+      font-size: 4rem;
+    }
   }
 }
 </style>

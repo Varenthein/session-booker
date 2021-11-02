@@ -4,8 +4,14 @@
   </div>
 </template>
 
-<style>
+<style lang="scss">
 .container {
   padding: 3rem;
+}
+
+@media (max-width: #{$sm-breakpoint}) {
+  .container {
+    padding: 1rem;
+  }
 }
 </style>

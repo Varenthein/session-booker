@@ -1,0 +1,16 @@
+<template>
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="16" height="16" viewBox="0 0 16 16">
+    <path :fill="props.color" d="M13.5 2l-7.5 7.5-3.5-3.5-2.5 2.5 6 6 10-10z"/>
+  </svg>
+</template>
+
+<script setup lang="ts">
+import { withDefaults, defineProps } from 'vue'
+
+const props = withDefaults(defineProps<{
+  color?: string
+}>(), {
+  color: '#FFF'
+})
+
+</script>
