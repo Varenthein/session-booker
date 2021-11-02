@@ -12,6 +12,8 @@
   > * {
     margin: auto;
     padding: 1rem;
+    overflow: auto;
+    max-height: 100%;
   }
 }
 </style>
