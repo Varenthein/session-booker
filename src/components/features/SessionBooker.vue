@@ -3,7 +3,7 @@
     <div class="flex-shrink--1">
       <img class="img-responsive d-md--none" src="../../assets/images/frameSide.png">
     </div>
-    <section class="max-wd--60r mx--auto mt--2">
+    <section class="max-wd--60r wd--100 mx--auto mt--2">
 
       <SessionCalendar
         :data="bookings"

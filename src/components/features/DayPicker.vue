@@ -18,7 +18,8 @@
     <!-- days to pick -->
     <div
       :key="day"
-      v-for="day in daysInMonth">
+      v-for="day in daysInMonth"
+    >
       <div v-if="countBookingsForDay(day) === slotsPerDay" :class="$style.dayBusy">
         Zajęte
       </div>
@@ -41,15 +42,14 @@ const props = defineProps<{
 
 const emit = defineEmits(['dayPick'])
 
-const disabledDays = computed(() => new Date(2021, props.month, 1).getDay() - 1)
-const daysInMonth = computed(() => new Date(2021, props.month, 0).getDate())
-const weekDays = computed(() => ['Pon', 'Wto', 'Śr', 'Czw', 'Pią', 'Sob', 'Nie'])
-const slotsPerDay = 7
-
 const countBookingsForDay = (day: number) => {
   return props.bookings.filter(booking => booking.day === day).length
 }
 
+const disabledDays = computed(() => new Date(2021, props.month, 1).getDay() - 1)
+const daysInMonth = computed(() => props.month === 11 ? 18 : new Date(2021, props.month, 0).getDate())
+const weekDays = computed(() => ['Pon', 'Wto', 'Śr', 'Czw', 'Pią', 'Sob', 'Nie'])
+const slotsPerDay = 7
 </script>
 
 <style lang="scss" module>
@@ -92,6 +92,11 @@ const countBookingsForDay = (day: number) => {
     .dayBusy {
       background: $activeColor url('../../assets/images/reindeer.png') no-repeat center center;
       background-size: 90% auto;
+    }
+
+    .disabled {
+      opacity: 0.2;
+      cursor: not-allowed;
     }
 
     &:hover:not(.disabled) {
