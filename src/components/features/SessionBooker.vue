@@ -19,6 +19,10 @@
         v-if="showThankYouBox"
         @close="showThankYouBox = false" />
 
+      <ErrorBox
+        v-if="showErrorBox"
+        @close="showErrorBox = false" />
+
     </section>
     <div class="flex-shrink--1">
       <img class="img-responsive t-flipX d-md--none" src="../../assets/images/frameSide.png">
@@ -32,6 +36,7 @@ import { Booking } from '../../interfaces/Booking.interface'
 import SessionCalendar from './SessionCalendar'
 import BookingForm from './BookingForm'
 import ThankYouBox from './../views/ThankYouBox'
+import ErrorBox from './../views/ErrorBox'
 import { API_URL } from '../../config'
 
 const bookings: Reactive<Booking[]> = reactive([])
@@ -50,6 +55,7 @@ const booking: Booking = reactive({
 
 const showBookingForm = ref(false)
 const showThankYouBox = ref(false)
+const showErrorBox = ref(false)
 
 const handleDayAndHourPick = ({ month, day, hour }) => {
   booking.month = month
@@ -59,16 +65,24 @@ const handleDayAndHourPick = ({ month, day, hour }) => {
 }
 
 const finishBooking = async (booking: Booking) => {
-  await fetch(`${API_URL}/bookings`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(booking)
-  })
-  bookings.push(booking)
-  showBookingForm.value = false
-  showThankYouBox.value = true
+  try {
+    const response = await fetch(`${API_URL}/bookings`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(booking)
+    })
+    if (response.status !== 200) { throw new Error('Something went wrong...') }
+
+    bookings.push(booking)
+    showBookingForm.value = false
+    showThankYouBox.value = true
+  } catch(e) {
+    console.error(e)
+    showBookingForm.value = false
+    showErrorBox.value = true
+  }
 }
 
 // load bookings at the startup

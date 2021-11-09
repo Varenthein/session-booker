@@ -23,6 +23,9 @@
       <div v-if="countBookingsForDay(day) === slotsPerDay" :class="$style.dayBusy">
         Zajęte
       </div>
+      <div v-else-if="dayPassed(day)" :class="[$style.dayBusy, $style.dayBlocked]">
+        X
+      </div>
       <div v-else @click="$emit('dayPick', day)">
         {{ day }}
       </div>
@@ -42,8 +45,18 @@ const props = defineProps<{
 
 const emit = defineEmits(['dayPick'])
 
+const today = new Date()
+const todayPlusBuffor = computed(() => {
+  return new Date(today.getFullYear(), today.getMonth(), today.getDate() + 3)
+})
+
 const countBookingsForDay = (day: number) => {
   return props.bookings.filter(booking => booking.day === day).length
+}
+
+const dayPassed = (day: number) => {
+  const dateForDay = new Date(today.getFullYear(), props.month, day)
+  return dateForDay.getTime() < todayPlusBuffor.value.getTime()
 }
 
 const disabledDays = computed(() => new Date(2021, props.month, 1).getDay() - 1)
@@ -90,6 +103,11 @@ const slotsPerDay = 7
     }
 
     .dayBusy {
+      background: $activeColor url('../../assets/images/reindeer.png') no-repeat center center;
+      background-size: 90% auto;
+    }
+
+    .dayBlocked {
       background: $activeColor url('../../assets/images/reindeer.png') no-repeat center center;
       background-size: 90% auto;
     }

@@ -46,7 +46,7 @@ const props = defineProps<{
 
 const emit = defineEmits(['confirm'])
 
-const booking: Reactive<Booking> = reactive(JSON.parse(JSON.stringify(props.booking)))
+const booking: Booking = reactive(JSON.parse(JSON.stringify(props.booking)))
 
 const sessionTypes = [
   {
