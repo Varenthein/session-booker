@@ -31,7 +31,7 @@ const props = defineProps<{
   bookings: Booking[]
 }>()
 
-const activeHours = [9, 10, 11, 12, 13, 14, 15]
+const activeHours = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 const isHourBusy = (hour: number) => props.bookings.some(booking => booking.hour === hour)
 </script>
 
